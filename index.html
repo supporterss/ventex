@@ -8,16 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Rajdhani:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-deep: #05080f;
-    --navy: #0a1324;
-    --navy-panel: #0d1a33;
-    --blue: #00d0ff;
-    --blue-dim: #1a5a8f;
-    --rift-purple: #9b4dff;
-    --ink: #e0f0ff;
-    --ink-dim: #8a9fc8;
-    --line: #1c3558;
+    --navy-deep: #0a0f1c;
+    --navy: #0f1629;
+    --navy-panel: #131c33;
+    --blue: #1e7aff;
+    --blue-dim: #0f4a8a;
+    --ink: #d8e4ff;
+    --ink-dim: #7a8eb8;
+    --line: #1c2a4d;
   }
+  
   *{ margin:0; padding:0; box-sizing:border-box; }
   html,body{
     background: var(--navy-deep);
@@ -26,66 +26,16 @@
     overflow-x: hidden;
   }
   a{ color: inherit; text-decoration:none; }
-  
-  /* Rift Background */
+
   .bg{
     position: fixed;
     inset: 0;
     z-index: 0;
     background: 
-      radial-gradient(circle at 40% 30%, rgba(155,77,255,0.25) 0%, transparent 60%),
-      radial-gradient(circle at 70% 70%, rgba(0,208,255,0.2) 0%, transparent 60%),
-      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-deep) 100%);
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
     pointer-events:none;
-    overflow: hidden;
   }
-  
-  .bg::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:
-      linear-gradient(rgba(155,77,255,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,208,255,0.08) 1px, transparent 1px);
-    background-size: 38px 38px;
-    animation: riftShift 25s linear infinite;
-    opacity: 0.7;
-  }
-  
-  .bg::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: radial-gradient(circle at 50% 40%, rgba(155,77,255,0.15), transparent 70%);
-    animation: riftPulse 8s ease-in-out infinite;
-    mix-blend-mode: screen;
-  }
-  
-  @keyframes riftShift {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(20px, -15px) rotate(3deg); }
-  }
-  
-  @keyframes riftPulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 0.95; transform: scale(1.08); }
-  }
-  
-  .storm-ring{
-    position:absolute;
-    border: 2px solid rgba(155,77,255,0.25);
-    border-radius: 50%;
-    right: -180px;
-    top: -180px;
-    box-shadow: 0 0 60px rgba(0,208,255,0.3);
-  }
-  .storm-ring.r1{ width: 580px; height: 580px; animation: ringSpin1 45s linear infinite; }
-  .storm-ring.r2{ width: 820px; height: 820px; border-color: rgba(0,208,255,0.18); animation: ringSpin2 65s linear infinite reverse; }
-  .storm-ring.r3{ width: 1100px; height: 1100px; border-color: rgba(155,77,255,0.12); animation: ringSpin1 80s linear infinite; }
-  
-  @keyframes ringSpin1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes ringSpin2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-  
+
   .wrap{
     position:relative;
     z-index:1;
@@ -93,6 +43,7 @@
     margin: 0 auto;
     padding: 0 24px;
   }
+
   nav{
     display:flex;
     align-items:center;
@@ -104,316 +55,219 @@
     font-family: 'Anton', sans-serif;
     font-size: 26px;
     letter-spacing: 0.08em;
-    text-shadow: 0 0 12px var(--blue);
   }
-  .logo span{ color: var(--rift-purple); }
+  .logo span{ color: var(--blue); }
+
   nav .nav-links a{
     font-family:'Space Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.12em;
     color: var(--ink-dim);
-    margin-left: 26px;
+    margin-left: 28px;
     text-transform: uppercase;
-    transition: color .2s, text-shadow .2s;
   }
-  nav .nav-links a:hover{ 
-    color: var(--blue); 
-    text-shadow: 0 0 8px var(--blue);
-  }
-  
+  nav .nav-links a:hover{ color: var(--blue); }
+
   .hero{
-    padding: 80px 0 50px;
-    position: relative;
+    padding: 90px 0 60px;
+    text-align: center;
   }
-  .banner-stripe{
-    position:relative;
-    display:inline-block;
-    background: linear-gradient(100deg, var(--rift-purple) 0%, var(--blue) 65%, var(--rift-purple) 100%);
-    clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
-    padding: 6px 22px 6px 16px;
-    margin-bottom: 26px;
-    box-shadow: 0 0 15px rgba(155,77,255,0.4);
-  }
-  .banner-stripe span{
-    font-family:'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #0a1324;
-  }
-  
+
   h1.title{
     font-family: 'Anton', sans-serif;
-    font-size: clamp(58px, 12vw, 118px);
-    line-height: 0.88;
-    letter-spacing: 0.01em;
-    color: var(--ink);
+    font-size: clamp(62px, 13vw, 120px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    margin-bottom: 8px;
-    text-shadow: 0 0 20px rgba(0,208,255,0.5);
+    margin-bottom: 12px;
   }
   h1.title .hl{
     color: var(--blue);
-    -webkit-text-stroke: 2px var(--rift-purple);
-    text-stroke: 2px var(--rift-purple);
   }
-  
+
   .tagline{
     font-size: 19px;
     color: var(--ink-dim);
-    max-width: 520px;
-    margin: 18px 0 40px;
+    max-width: 560px;
+    margin: 0 auto 40px;
     line-height: 1.5;
-    border-left: 3px solid var(--rift-purple);
-    padding-left: 16px;
   }
-  
+
   .cta-row{
     display:flex;
     gap: 16px;
+    justify-content: center;
     flex-wrap: wrap;
   }
   .btn{
-    display:inline-flex;
-    align-items:center;
-    gap: 10px;
     font-family:'Space Mono', monospace;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 17px 30px;
-    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
-    transition: transform .15s ease, filter .15s ease, box-shadow .2s;
-  }
-  .btn:focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
-  .btn:hover{ 
-    transform: translate(3px,-3px); 
-    box-shadow: 0 0 20px var(--rift-purple);
+    padding: 18px 32px;
+    transition: all .2s;
   }
   .btn-primary{
-    background: linear-gradient(90deg, var(--blue), var(--rift-purple));
-    color: #05080f;
+    background: var(--blue);
+    color: #0a0f1c;
   }
-  .btn-primary:hover{ filter: brightness(1.15); }
+  .btn-primary:hover{
+    background: #2e8fff;
+    transform: translateY(-2px);
+  }
   .btn-ghost{
     background: transparent;
     border: 1px solid var(--blue-dim);
     color: var(--ink);
   }
-  .btn-ghost:hover{ 
-    border-color: var(--blue); 
-    color: var(--blue); 
+  .btn-ghost:hover{
+    border-color: var(--blue);
+    color: var(--blue);
   }
-  
+
   .stat-strip{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin: 70px 0;
+    gap: 16px;
+    margin: 80px 0;
   }
   .stat-card{
-    position:relative;
     background: var(--navy-panel);
     border: 1px solid var(--line);
-    padding: 22px 20px;
+    padding: 24px 20px;
+    text-align: center;
   }
-  .stat-card::before, .stat-card::after{
-    content:"";
-    position:absolute;
-    width: 14px; height: 14px;
-    border: 2px solid var(--rift-purple);
-  }
-  .stat-card::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
-  .stat-card::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
   .stat-card .num{
     font-family: 'Anton', sans-serif;
-    font-size: 36px;
+    font-size: 42px;
     color: var(--blue);
-    text-shadow: 0 0 10px var(--blue);
   }
   .stat-card .label{
     font-family:'Space Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.1em;
     color: var(--ink-dim);
     text-transform: uppercase;
-    margin-top: 6px;
+    margin-top: 8px;
   }
-  
-  .section-head{
-    display:flex;
-    align-items:baseline;
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .section-head .idx{
-    font-family:'Space Mono', monospace;
-    color: var(--rift-purple);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-  }
-  .section-head h2{
-    font-family: 'Anton', sans-serif;
-    font-size: 28px;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-  
+
   .panels{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin: 0 0 80px;
+    gap: 16px;
+    margin-bottom: 80px;
   }
   .panel{
     background: var(--navy-panel);
     border: 1px solid var(--line);
-    border-top: 3px solid var(--blue);
-    padding: 26px 22px;
-    transition: transform .2s;
+    padding: 28px 24px;
   }
-  .panel:hover{ transform: translateY(-4px); }
   .panel h3{
     font-family: 'Anton', sans-serif;
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    letter-spacing: 0.01em;
+    font-size: 19px;
+    margin-bottom: 12px;
   }
   .panel p{
-    font-size: 14px;
     color: var(--ink-dim);
-    line-height: 1.55;
+    line-height: 1.6;
   }
-  
+
   .join{
-    position:relative;
-    margin: 0 0 70px;
-    padding: 50px 40px;
     background: var(--navy-panel);
     border: 1px solid var(--line);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+    padding: 60px 40px;
     text-align:center;
+    margin-bottom: 60px;
   }
   .join h2{
     font-family: 'Anton', sans-serif;
-    font-size: clamp(26px, 5vw, 38px);
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-size: 36px;
+    margin-bottom: 16px;
   }
-  .join h2 .hl{ color: var(--rift-purple); }
-  .join p{
-    color: var(--ink-dim);
-    margin-bottom: 28px;
-    font-size: 15px;
-  }
-  .join .cta-row{ justify-content:center; }
-  
+  .join h2 span{ color: var(--blue); }
+
   footer{
     border-top: 1px solid var(--line);
-    padding: 24px 0 50px;
+    padding: 30px 0;
     display:flex;
     justify-content:space-between;
-    align-items:center;
     font-family:'Space Mono', monospace;
     font-size: 11px;
     color: var(--ink-dim);
-    letter-spacing: 0.05em;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
   }
-  footer .live{ color: var(--blue); text-shadow: 0 0 6px var(--blue); }
-  
+
   @media (max-width: 680px){
-    .panels{ grid-template-columns: 1fr; }
-    .stat-strip{ grid-template-columns: 1fr; }
-    nav .nav-links a{ margin-left: 14px; }
-    .join{ padding: 38px 22px; }
+    .panels, .stat-strip{ grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-<div class="bg">
-  <div class="storm-ring r1"></div>
-  <div class="storm-ring r2"></div>
-  <div class="storm-ring r3"></div>
-</div>
+<div class="bg"></div>
 <div class="wrap">
   <nav>
     <div class="logo">VEN<span>TEX</span></div>
     <div class="nav-links">
       <a href="#download">Download</a>
       <a href="#join">Community</a>
-      <a href="https://discord.gg/ventexfn" target="_blank" rel="noopener">Discord</a>
+      <a href="https://discord.gg/ventexfn" target="_blank">Discord</a>
     </div>
   </nav>
-  
+
   <section class="hero">
-    <div class="banner-stripe"><span>Build 0.x • LIVE IN THE LOBBY</span></div>
     <h1 class="title">VEN<span class="hl">TEX</span></h1>
-    <p class="tagline">Real players. Real matches. No corporate BS. Just the squad throwing down in a custom arena we built together. 30+ already dropping — you in?</p>
+    <p class="tagline">Queue up. Drop in the lobby.<br>
+    Community built arena — already 30+ deep.</p>
+    
     <div class="cta-row">
-      <a class="btn btn-primary" id="download" href="https://www.mediafire.com/PASTE-YOUR-VENTEX-LINK-HERE" target="_blank" rel="noopener">
-        ↓ GRAB THE BUILD
-      </a>
-      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank" rel="noopener">
-        JOIN THE DISCORD
-      </a>
+      <a class="btn btn-primary" href="https://www.swisstransfer.com/d/f340ef5b-e510-4db2-9459-2d3f7afa2a74" target="_blank">DOWNLOAD BUILD</a>
+      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank">JOIN DISCORD</a>
     </div>
   </section>
-  
+
   <div class="stat-strip">
     <div class="stat-card">
       <div class="num">30+</div>
-      <div class="label">RIFTED UP</div>
+      <div class="label">Players</div>
     </div>
     <div class="stat-card">
       <div class="num">LIVE</div>
-      <div class="label">Servers Poppin</div>
+      <div class="label">Build Status</div>
     </div>
     <div class="stat-card">
       <div class="num">24/7</div>
-      <div class="label">Squad Activity</div>
+      <div class="label">Active</div>
     </div>
   </div>
-  
-  <div class="section-head">
-    <span class="idx">01 / LOADOUT</span>
-    <h2>How to Drop In</h2>
-  </div>
+
   <div class="panels">
     <div class="panel">
-      <h3>Snag the Build</h3>
-      <p>MediaFire link. No Epic launcher, no extra crap. Just download and run. Simple.</p>
+      <h3>1. Grab the Build</h3>
+      <p>Direct download. </p>
     </div>
     <div class="panel">
-      <h3>Link Up in Discord</h3>
-      <p>Patch notes, LFG, bug calls, and the actual homies in the lobby right now.</p>
+      <h3>2. Join Discord</h3>
+      <p>For Patches,Updates.</p>
     </div>
     <div class="panel">
-      <h3>Hit the Rift</h3>
-      <p>Balanced by us, for us. Come through the portal and see why everyone's talking.</p>
+      <h3>3. Drop In</h3>
+      <p>Real players. Real matches. No bullshit.</p>
     </div>
   </div>
-  
+
   <section class="join" id="join">
-    <h2>30+ already <span class="hl">rifted in.</span></h2>
-    <p>The lobby's warm. Squad's waiting for the next W. Don't make 'em wait too long.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="https://www.mediafire.com/PASTE-YOUR-VENTEX-LINK-HERE" target="_blank" rel="noopener">
-        ↓ DOWNLOAD BUILD
-      </a>
-      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank" rel="noopener">
-        discord.gg/ventexfn
-      </a>
+    <h2>30+ already <span>in the lobby.</span></h2>
+    <p>.</p>
+    <div class="cta-row" style="margin-top:30px;">
+      <a class="btn btn-primary" href="https://www.swisstransfer.com/d/f340ef5b-e510-4db2-9459-2d3f7afa2a74" target="_blank">DOWNLOAD BUILD</a>
+      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank">DISCORD</a>
     </div>
   </section>
-  
+
   <footer>
-    <div>VENTEX • COMMUNITY BUILT • 2026</div>
-    <div class="live">● RIFT STATUS: ACTIVE</div>
+    <div>VENTEX © 2026 • Community Built</div>
+    <div>Status: Active Development</div>
   </footer>
 </div>
 </body>
