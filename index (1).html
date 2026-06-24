@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VENTEX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Rajdhani:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep: #060d1a;
+    --navy: #0c1a30;
+    --navy-panel: #0f2240;
+    --blue: #2e8eff;
+    --blue-dim: #1a4a85;
+    --gold: #ffb338;
+    --ink: #e9f1ff;
+    --ink-dim: #7d93b8;
+    --line: #1c3a60;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html,body{
+    background: var(--navy-deep);
+    color: var(--ink);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; text-decoration:none; }
+
+  .bg{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    pointer-events:none;
+  }
+  .bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(46,142,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46,142,255,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at 50% 0%, rgba(0,0,0,0.9), transparent 70%);
+  }
+  .storm-ring{
+    position:absolute;
+    border: 1px solid rgba(46,142,255,0.18);
+    border-radius: 50%;
+    right: -220px;
+    top: -220px;
+  }
+  .storm-ring.r1{ width: 520px; height: 520px; }
+  .storm-ring.r2{ width: 760px; height: 760px; border-color: rgba(46,142,255,0.1); }
+  .storm-ring.r3{ width: 1000px; height: 1000px; border-color: rgba(46,142,255,0.06); }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.06em;
+  }
+  .logo span{ color: var(--blue); }
+  nav .nav-links a{
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    margin-left: 26px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  nav .nav-links a:hover{ color: var(--gold); }
+
+  .hero{
+    padding: 80px 0 50px;
+    position: relative;
+  }
+
+  .banner-stripe{
+    position:relative;
+    display:inline-block;
+    background: linear-gradient(100deg, var(--blue) 0%, var(--blue) 60%, var(--gold) 60%, var(--gold) 100%);
+    clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
+    padding: 6px 22px 6px 16px;
+    margin-bottom: 26px;
+  }
+  .banner-stripe span{
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--navy-deep);
+  }
+
+  h1.title{
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(58px, 12vw, 118px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h1.title .hl{
+    color: var(--blue);
+    -webkit-text-stroke: 2px var(--gold);
+    text-stroke: 2px var(--gold);
+  }
+
+  .tagline{
+    font-size: 19px;
+    color: var(--ink-dim);
+    max-width: 520px;
+    margin: 18px 0 40px;
+    line-height: 1.5;
+    border-left: 3px solid var(--gold);
+    padding-left: 16px;
+  }
+
+  .cta-row{
+    display:flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    font-family:'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 17px 30px;
+    clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+    transition: transform .15s ease, filter .15s ease;
+  }
+  .btn:focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+  .btn:hover{ transform: translate(2px,-2px); }
+
+  .btn-primary{
+    background: var(--blue);
+    color: var(--navy-deep);
+  }
+  .btn-primary:hover{ filter: brightness(1.12); }
+
+  .btn-ghost{
+    background: transparent;
+    border: 1px solid var(--blue-dim);
+    color: var(--ink);
+  }
+  .btn-ghost:hover{ border-color: var(--gold); color: var(--gold); }
+
+  .stat-strip{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 70px 0;
+  }
+  .stat-card{
+    position:relative;
+    background: var(--navy-panel);
+    border: 1px solid var(--line);
+    padding: 22px 20px;
+  }
+  .stat-card::before, .stat-card::after{
+    content:"";
+    position:absolute;
+    width: 14px; height: 14px;
+    border: 2px solid var(--gold);
+  }
+  .stat-card::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .stat-card::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+  .stat-card .num{
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    color: var(--blue);
+  }
+  .stat-card .label{
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .section-head .idx{
+    font-family:'Space Mono', monospace;
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .section-head h2{
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .panels{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 0 0 80px;
+  }
+  .panel{
+    background: var(--navy-panel);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--blue);
+    padding: 26px 22px;
+  }
+  .panel h3{
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+  }
+  .panel p{
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.55;
+  }
+
+  .join{
+    position:relative;
+    margin: 0 0 70px;
+    padding: 50px 40px;
+    background: var(--navy-panel);
+    border: 1px solid var(--line);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%);
+    text-align:center;
+  }
+  .join h2{
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(26px, 5vw, 38px);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .join h2 .hl{ color: var(--gold); }
+  .join p{
+    color: var(--ink-dim);
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+  .join .cta-row{ justify-content:center; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 24px 0 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.05em;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  footer .live{ color: var(--gold); }
+
+  @media (max-width: 680px){
+    .panels{ grid-template-columns: 1fr; }
+    .stat-strip{ grid-template-columns: 1fr; }
+    nav .nav-links a{ margin-left: 14px; }
+    .join{ padding: 38px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="storm-ring r1"></div>
+  <div class="storm-ring r2"></div>
+  <div class="storm-ring r3"></div>
+</div>
+
+<div class="wrap">
+
+  <nav>
+    <div class="logo">VEN<span>TEX</span></div>
+    <div class="nav-links">
+      <a href="#download">Download</a>
+      <a href="#join">Community</a>
+      <a href="https://discord.gg/ventexfn" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="banner-stripe"><span>Build 0.x &middot; Now Dropping</span></div>
+    <h1 class="title">VEN<span class="hl">TEX</span></h1>
+    <p class="tagline">Squad up. Drop in. Outlast the lobby. Ventex is the arena our own community built — and it's already 30+ players deep.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" id="download" href="https://www.mediafire.com/PASTE-YOUR-VENTEX-LINK-HERE" target="_blank" rel="noopener">
+        Download Build
+      </a>
+      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank" rel="noopener">
+        Join Discord
+      </a>
+    </div>
+  </section>
+
+  <div class="stat-strip">
+    <div class="stat-card">
+      <div class="num">30+</div>
+      <div class="label">Players Onboard</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">LIVE</div>
+      <div class="label">Build Status</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">24/7</div>
+      <div class="label">Discord Active</div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <span class="idx">LOADOUT</span>
+    <h2>How to get in</h2>
+  </div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>Grab the build</h3>
+      <p>Hosted on MediaFire. No launcher, no install steps — download and run.</p>
+    </div>
+    <div class="panel">
+      <h3>Link up on Discord</h3>
+      <p>Patch notes, bug reports, matchmaking, and the people actually in the lobby with you.</p>
+    </div>
+    <div class="panel">
+      <h3>Drop into the arena</h3>
+      <p>Ventex gets balanced around real matches from real players — that's the squad you're joining.</p>
+    </div>
+  </div>
+
+  <section class="join" id="join">
+    <h2>30+ players already <span class="hl">in the lobby.</span></h2>
+    <p>Come see what the hype's about — squad's waiting.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://www.mediafire.com/PASTE-YOUR-VENTEX-LINK-HERE" target="_blank" rel="noopener">
+        Download Build
+      </a>
+      <a class="btn btn-ghost" href="https://discord.gg/ventexfn" target="_blank" rel="noopener">
+        discord.gg/ventexfn
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div>VENTEX © 2026</div>
+    <div class="live">● Status: In active development</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
